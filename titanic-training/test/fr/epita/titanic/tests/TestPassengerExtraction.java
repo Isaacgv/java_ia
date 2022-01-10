@@ -18,11 +18,13 @@ public class TestPassengerExtraction {
         int totalMen = 0;
         int totalWomen = 0;
         int totalUnknowSex = 0;
+        int countAge = 0;
 
         for(Passenger passenger : passengers){
             boolean ageExist = passenger.getAge() != null;
             if (ageExist) {
                 totalAge += passenger.getAge();
+                countAge += 1;
             }
 
             boolean sexExist = passenger.getSex() != null;
@@ -40,7 +42,7 @@ public class TestPassengerExtraction {
         }
 
         int sizePassengers = passengers.size();
-        double averageAge = totalAge / sizePassengers;
+        double averageAge = totalAge / countAge;
 
         for(Passenger passenger : passengers) {
             boolean ageExist = passenger.getAge() != null;
@@ -48,15 +50,15 @@ public class TestPassengerExtraction {
                 standarDesviationAge += Math.pow(passenger.getAge()-averageAge,2);
             }
         }
-        standarDesviationAge /= passengers.size();
+        standarDesviationAge /= countAge;
         standarDesviationAge = Math.sqrt(standarDesviationAge);
 
         int totalSex = totalMen + totalWomen;
         double porcentageMen = totalMen*100.0 / sizePassengers;
         double porcentageWomen = totalWomen*100.0 / sizePassengers;
 
-        System.out.println("Average Age: " + averageAge);
-        System.out.format("Standar Desviation Age: %.2f %n", standarDesviationAge);
+        System.out.println("Average Age (without null): " + averageAge);
+        System.out.format("Standar Desviation Age (without null): %.2f %n", standarDesviationAge);
         System.out.println("Total Men: " + totalMen);
         System.out.format("Porcentage Men: %.2f",porcentageMen);
         System.out.println("%");
